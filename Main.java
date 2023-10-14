@@ -4,14 +4,14 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-      
+        System.out.println(calc("1 + 2"));
     }
 
     public static String calc(String input) throws Exception {
         String[] s = input.split(" ");
         try {
-            if (s.length > 3) {
-                s[-1] = "";
+            if (s.length != 3) {
+                return "throws Exception";;
             }
             if (validOperation(s[1].charAt(0))) {
                 if (romanToIntAndValid(s[0]) != -1 && romanToIntAndValid(s[2]) != -1) {
