@@ -6,12 +6,15 @@ import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) {
+
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             System.out.println(calc(reader.readLine()));
         } catch (Exception e) {
             System.out.println("throw Exeption");
         }
+
+
     }
 
     public static String calc(String input) throws Exception {
@@ -32,14 +35,12 @@ public class Main {
 
 
     public static boolean validNumeric(String s) throws Exception {
-        try {
-            int a = Integer.parseInt(s);
-            if (a < 1 || a > 10) {
-                throw new Exception();
-            }
-        } catch (Exception e) {
+
+        int a = Integer.parseInt(s);
+        if (a < 1 || a > 10) {
             throw new Exception();
         }
+
         return true;
     }
 
