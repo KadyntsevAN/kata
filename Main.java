@@ -37,7 +37,7 @@ public class Main {
             if (a < 1 || a > 10) {
                 throw new Exception();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new Exception();
         }
         return true;
