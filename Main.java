@@ -3,47 +3,46 @@ package com.company;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        System.out.println(calc("1 + 2"));
+    public static void main(String[] args) {
+        try {
+            System.out.println(calc("1 + 2"));
+        } catch (Exception e) {
+            System.out.println("throw Exeption");
+        }
+
+
     }
 
     public static String calc(String input) throws Exception {
         String[] s = input.split(" ");
-        try {
-            if (s.length != 3) {
-                return "throws Exception";;
-            }
-            if (validOperation(s[1].charAt(0))) {
-                if (romanToIntAndValid(s[0]) != -1 && romanToIntAndValid(s[2]) != -1) {
-                    return convertToRoman(account(romanToIntAndValid(s[0]), romanToIntAndValid(s[2]), s[1].charAt(0)));
-                } else if (validNumeric(s[0]) && validNumeric(s[2])) {
-                    return String.valueOf(account(Integer.parseInt(s[0]), Integer.parseInt(s[2]), s[1].charAt(0)));
-                }
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("throws Exception");
-            System.exit(0);
+        String result = "";
+        if (s.length != 3) {
+            throw new Exception();
         }
-
-        return "throws Exception";
+        if (validOperation(s[1].charAt(0))) {
+            if (romanToIntAndValid(s[0]) != -1 && romanToIntAndValid(s[2]) != -1) {
+                result = convertToRoman(account(romanToIntAndValid(s[0]), romanToIntAndValid(s[2]), s[1].charAt(0)));
+            } else if (validNumeric(s[0]) && validNumeric(s[2])) {
+                result = String.valueOf(account(Integer.parseInt(s[0]), Integer.parseInt(s[2]), s[1].charAt(0)));
+            }
+        }
+        return result;
     }
 
 
-    public static boolean validNumeric(String s) {
+    public static boolean validNumeric(String s) throws Exception {
         try {
             int a = Integer.parseInt(s);
             if (a < 1 || a > 10) {
-                throw new IOException();
+                throw new Exception();
             }
-            return true;
-        } catch (NumberFormatException | IOException e) {
-            System.out.println("throws Exception");
-            System.exit(0);
+        } catch (IOException e) {
+            throw new Exception();
         }
-        return false;
+        return true;
     }
 
-    public static int romanToIntAndValid(String s) {
+    public static int romanToIntAndValid(String s) throws Exception {
         int num = 0;
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
@@ -69,13 +68,8 @@ public class Main {
                     return num;
             }
         }
-        try {
-            if (num < 1 || num > 10) {
-                throw new IOException();
-            }
-        } catch (IOException e) {
-            System.out.println("throws Exception");
-            System.exit(0);
+        if (num < 1 || num > 10) {
+            throw new Exception();
         }
         return num;
     }
@@ -95,14 +89,9 @@ public class Main {
         } else return a * b;
     }
 
-    public static String convertToRoman(int number) {
+    public static String convertToRoman(int number) throws Exception {
         if (number < 1 || number > 100) {
-            try {
-                throw new IOException();
-            } catch (IOException e) {
-                System.out.println("throws Exception");
-                System.exit(0);
-            }
+            throw new Exception();
         }
 
         String[] units = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
